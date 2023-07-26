@@ -26,3 +26,8 @@ def test_repo_cannot_be_found(github_api):
 def test_repo_with_single_char_be_found(github_api):
     r = github_api.search_repo('s')
     assert r['total_count'] != 0
+
+@pytest.mark.api
+def test_get_list_users(github_api):
+    r = github_api.get_list_users(" ")
+    assert r[" "] 

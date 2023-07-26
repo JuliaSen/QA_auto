@@ -16,3 +16,9 @@ class GitHub:
         body = r.json()
         
         return body
+    
+    def get_list_users(self):
+        r = requests.get("https://api.github.com/users")
+        body = r.json
+
+        return body
