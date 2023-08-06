@@ -56,3 +56,39 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
+    
+    def get_all_products(self):
+        query = "SELECT name, description, quantity FROM products"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+    
+    def get_different_value_quantity_of_product(self):
+        query = "SELECT DISTINCT quantity FROM products"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+    
+    def check_quantity_product_more_than(self, qnt):
+        query = f"SELECT name FROM products WHERE quantity > {qnt}"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+    
+    def update_user_adr_by_id(self, user_id, adr):
+        query = f"UPDATE customers SET address = '{adr}' WHERE id = {user_id}"
+        self.cursor.execute(query)
+        self.connection.commit()
+
+
+    def select_user_adr_by_id(self, user_id):
+        query = f"SELECT address FROM customers WHERE id = {user_id}"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+    
+    def insert_user(self, user_id, name, adr, city, postCode, country):
+        query = f"INSERT OR REPLACE INTO customers (id, name, address, city, postalCode, country) \
+            VALUES ({user_id}, '{name}', '{adr}', '{city}', {postCode}, '{country}')"
+        self.cursor.execute(query)
+        self.connection.commit()

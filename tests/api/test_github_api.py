@@ -1,6 +1,5 @@
 import pytest
 
-
 @pytest.mark.api
 def test_user_exists(github_api):
     user = github_api.get_user('defunkt')
@@ -28,6 +27,21 @@ def test_repo_with_single_char_be_found(github_api):
     assert r['total_count'] != 0
 
 @pytest.mark.api
-def test_get_list_users(github_api):
-    r = github_api.get_list_users(" ")
-    assert r[" "] 
+def test_status_code200(github_api):
+    r = github_api.check_status_code()
+    assert r.status_code == 200
+
+   
+@pytest.mark.api
+def test_list_emojis_not_empty(github_api):
+    r = github_api.check_empty_list_emojis()
+    assert len(r) > 2
+
+@pytest.mark.api
+def test_search_emoji_wolf(github_api):
+    r = github_api.check_empty_list_emojis()
+    assert "wolf" in r
+    if "wolf" in r:
+        print(True)
+    else:
+        print(False)

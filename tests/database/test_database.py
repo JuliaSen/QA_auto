@@ -62,4 +62,42 @@ def test_detailed_orders():
     assert orders[0][2] == 'солодка вода'
     assert orders[0][3] == 'з цукром'
 
+@pytest.mark.database
+def test_check_all_type_of_products():
+    db = Database()
+    type_of_products = db.get_all_products()
 
+    print(type_of_products)
+
+@pytest.mark.database
+def test_search_different_quantity_of_products():
+    db = Database()
+    dif_quantity = db.get_different_value_quantity_of_product()
+
+    print(dif_quantity)
+
+@pytest.mark.database
+def test_quantity_product_more_than():
+    db = Database()
+    qnt_more = db.check_quantity_product_more_than(25)
+ 
+    assert qnt_more[0][0] == 'печиво'
+   
+@pytest.mark.database
+def test_user_address_update():
+    db = Database()
+    db.update_user_adr_by_id(2, 111111)
+    user_adr = db.select_user_adr_by_id(2)
+    assert user_adr[0][0] == 111111
+   
+
+@pytest.mark.database
+def test_user_insert():
+    db = Database()
+    db.insert_user(3,'Ivan Franko','Lvivska str, 15', 'Naguevychi', 78012, 'Ukraine')
+    user_adr = db.select_user_adr_by_id(3)
+
+    assert user_adr[0][0] == 'Lvivska str, 15'
+        
+
+ 

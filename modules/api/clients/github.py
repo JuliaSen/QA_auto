@@ -17,8 +17,18 @@ class GitHub:
         
         return body
     
-    def get_list_users(self):
-        r = requests.get("https://api.github.com/users")
-        body = r.json
+    def check_status_code(self):
+        r = requests.get("https://api.github.com/emojis")
+        response = r
+        return response
+    
 
+    def check_empty_list_emojis(self):
+        r = requests.get("https://api.github.com/emojis")
+        body = r.text
+        return body
+    
+    def search_emoji(self):
+        r = requests.get("https://api.github.com/emojis")
+        body = r.json
         return body
